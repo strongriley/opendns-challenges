@@ -122,6 +122,10 @@ INSTALLED_APPS = (
 
     # 3rd Party Libraries
     'django_extensions',
+
+    # Apps
+    'shortener.phishes',
+    'shortener.shortenings',
 )
 
 # A sample logging configuration. The only tangible logging

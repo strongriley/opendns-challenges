@@ -7,8 +7,14 @@ class PhishUrl(models.Model):
     http://www.phishtank.com/developer_info.php
     """
     phish_id = models.IntegerField()
-    url = models.CharField(max_length=2048)
+    url = models.CharField(max_length=2048, unique=True)
     inserted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        get_latest_by = 'inserted'
+
+    def __unicode__(self):
+        return self.url
 
 
 class PhishDomain(models.Model):
@@ -21,3 +27,8 @@ class PhishDomain(models.Model):
     domain_name = models.CharField(max_length=2048, unique=True)
     inserted = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        get_latest_by = 'inserted'
+
+    def __unicode__(self):
+        return self.domain_name

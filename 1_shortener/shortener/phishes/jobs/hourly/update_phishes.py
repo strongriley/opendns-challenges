@@ -4,13 +4,13 @@ import json
 from datetime import datetime
 
 from django.conf import settings
-from django_extensions.management.jobs import BaseJob
+from django_extensions.management.jobs import HourlyJob
 
 from shortener.phishes.models import PhishUrl
 from shortener.phishes.models import PhishDomain
 
 
-class Job(BaseJob):
+class Job(HourlyJob):
     """
     Updates Phish records. For speed, we use our own DB records taken from
     phishtank.com and we won't hit their API limit.

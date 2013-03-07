@@ -165,5 +165,5 @@ LOGGING = {
 PHISHTANK_API_KEY = '03dd2b2adce3749382b1360abd17f31808dd3a06a529e081bd0c016f0e5f41c9'
 PHISHTANK_JSON_URL = ''.join(('http://data.phishtank.com/data/',
                               PHISHTANK_API_KEY,
-                              'online-valid.json'))
+                              '/online-valid.json'))
 

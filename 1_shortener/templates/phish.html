@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title%}Safety Alert{% endblock %}
+{% block header-title %}Watch Out!{% endblock %}
+
+{% block header-class %}error{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="small-centered large-8 columns error">
+            <h4>The Link You're Trying to Reach Has Been Blocked</h4>
+            <p>
+            For your safety, we will not forward you onto the site because
+            we believe this site may be trying to steal your personal
+            information.
+            </p>
+        </div>
+    </div>
+{% endblock %}

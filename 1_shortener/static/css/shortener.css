@@ -5,3 +5,6 @@ header {
 header h1 {
     color: white;
 }
+header.error {
+    background: #c60f13;
+}

@@ -15,10 +15,14 @@
     <script src="{% static "js/vendor/custom.modernizr.js" %}"></script>
 </head>
 <body>
-    <header>
+    <header class="{% block header-class %}{% endblock %}">
         <div class="row">
             <div class="large-12 columns">
-                <h1 class="text-center">Shorten That Link!</h1>
+                <h1 class="text-center">
+                    {% block header-title %}
+                        Shorten That Link!
+                    {% endblock %}
+                </h1>
             </div>
         </div>
     </header>

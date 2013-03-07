@@ -1,3 +1,27 @@
-hello world
-{{ form }}
+{% extends 'base.html' %}
+
+{% block title %}Details{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="small-centered large-12 columns">
+            <div class="row">
+                <div class="text-right small-4 columns">
+                    <h4>Short Link</h4>
+                    <h4>Redirects To</h4>
+                    <h4>Clicks</h4>
+                </div>
+                <div class="small-8 columns">
+                    <h4>
+                        {{ ABSOLUTE_ROOT_URL }}{{ object.short_id }}/
+                    </h4>
+                    <h4>
+                        <a href="{{ object.url }}">{{ object.url }}</a>
+                    </h4>
+                    <h4>{{ object.visits }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {{ object.url }}

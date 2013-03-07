@@ -7,7 +7,13 @@
                 <hr>
                 <h4>Paste Your URL Here:</h4>
                 <input id="id_url" maxlength="2048" name="url" type="text"
-                        placeholder="Link">
+                        placeholder="Link"
+                        {% if form.errors %}class="error"{% endif %}>
+                {% if form.errors %}
+                    <small class="error">
+                        {{ form.errors.url }}
+                    </small>
+                {% endif %}
                 <div class="small-centered small-6 columns">
                     <input type="SUBMIT" class="large round button expand"
                             value="Shorten!">

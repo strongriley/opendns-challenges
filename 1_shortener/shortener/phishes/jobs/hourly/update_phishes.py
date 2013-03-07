@@ -7,7 +7,6 @@ from django.conf import settings
 from django_extensions.management.jobs import HourlyJob
 
 from shortener.phishes.models import PhishUrl
-from shortener.phishes.models import PhishDomain
 
 
 class Job(HourlyJob):
@@ -19,11 +18,12 @@ class Job(HourlyJob):
 
     def execute(self):
         # Determine where to start in the phishtank parsed file.
-        count = PhishDomain.objects.count()
+        count = PhishUrl.objects.count()
+        latest_entry = None
+        latest = None
         if count:
-            latest = PhishDomain.objects.latest().inserted
-        else:
-            latest = False
+            latest_entry = PhishUrl.objects.latest()
+            latest = latest_entry.inserted
 
         # Get the data from the server.
         # This will take a while - it's a big file.
@@ -35,24 +35,38 @@ class Job(HourlyJob):
         # 50 MB every time.
         path = os.path.join(settings.SRC_PATH, 'verified_online.json')
         if settings.DEBUG and not latest and os.path.isfile(path):
+            print "Using debugging file"
             with open(path) as f:  # Cleanup and close
                 raw_json = f.read()
         else:
-            raw_json = urllib2.urlopen(settings.PHISHTANK_JSON_URL).open()
+            print "Downloading file (This may take a while)."
+            raw_json = urllib2.urlopen(settings.PHISHTANK_JSON_URL).read()
 
-        # Prepare data for insertion
-        # insertion time based on verification_time.
+        # Prepare data for insertion.
+        # insertion time based on verification_time since only verified
+        # entries appear.
         parsed = json.loads(raw_json)
         if latest:
             # TODO with more understanding of file, could skip lots of entries
-            # after the 1st pass, potentially O(log(n)) instead of O(n) efficiency
-            # if the file is timestamp-ordered.
+            # if the file is ordered
             for entry in parsed:
-                parsed['inserted'] = datetime.strptime(entry['verification_time'])
-            parsed = [url for url in parsed if url.inserted > latest]
+                # TODO refactor with dateutil, but trying to stick with pure
+                # python - fewer extensions.
+                entry['inserted'] = datetime.strptime(
+                    entry['verification_time'][:-6],
+                    '%Y-%m-%dT%H:%M:%S')
+                entry['inserted'] = entry['inserted'].replace(
+                    tzinfo=latest.tzinfo)
+            parsed = [url for url in parsed if url['inserted'] > latest]
 
-        # Bulk insert to save the database
+        # Bulk insert to save the database.
+        id = latest_entry.pk + 1 if latest_entry else 1
         urls = []
         for entry in parsed:
-            urls.append(PhishUrl(url=entry['url']))
-        PhishUrl.objects.bulk_create(urls)
+            urls.append(PhishUrl(pk=id,
+                                 phish_id=entry['phish_id'],
+                                 url=entry['url']))
+            id = id + 1
+        # Limit batch size to 500 because of sqlite constraints.
+        # http://stackoverflow.com/a/9527898/561956
+        PhishUrl.objects.bulk_create(urls, batch_size=500)

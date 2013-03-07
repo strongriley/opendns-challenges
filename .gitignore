@@ -46,4 +46,4 @@ nosetests.xml
 .project
 .pydevproject
 .ropeproject
-
+.swo

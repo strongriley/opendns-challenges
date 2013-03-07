@@ -10,15 +10,18 @@
 
     <link rel="stylesheet" href="{% static "css/normalize.css" %}"/>
     <link rel="stylesheet" href="{% static "css/foundation.css" %}" />
+    <link rel="stylesheet" href="{% static "css/shortener.css" %}" />
 
     <script src="{% static "js/vendor/custom.modernizr.js" %}"></script>
 </head>
 <body>
-    <div class="row">
-        <div class="large-12 columns">
-        Hello
+    <header>
+        <div class="row">
+            <div class="large-12 columns">
+                <h1 class="text-center">Shorten That Link!</h1>
+            </div>
         </div>
-    </div>
+    </header>
     {% block body %}
     {% endblock %}
 </body>

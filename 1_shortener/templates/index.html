@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% block body %}
-hello world
-    <form method="POST" action"/">
-        {% csrf_token %}
-    {{ form }}
-    <input type="SUBMIT">
-    </form>
+    <div class="row">
+        <div class="small-centered large-6 columns">
+            <form method="POST" action"/">
+                {% csrf_token %}
+                <hr>
+                <h4>Paste Your URL Here:</h4>
+                <input id="id_url" maxlength="2048" name="url" type="text"
+                        placeholder="Link">
+                <div class="small-centered small-6 columns">
+                    <input type="SUBMIT" class="large round button expand"
+                            value="Shorten!">
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

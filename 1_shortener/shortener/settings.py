@@ -108,6 +108,7 @@ ROOT_URLCONF = 'shortener.urls'
 #WSGI_APPLICATION = 'shortener.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(SRC_PATH, 'templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

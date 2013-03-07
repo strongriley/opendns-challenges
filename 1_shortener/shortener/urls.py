@@ -3,13 +3,9 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from shortener.shortenings.views import ShorteningCreate
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'shortener.views.home', name='home'),
-    # url(r'^shortener/', include('shortener.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    url(r'^$',ShorteningCreate.as_view()),
     url(r'^admin/', include(admin.site.urls)),
 )

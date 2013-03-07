@@ -2,6 +2,8 @@
 import os
 import string
 
+from django.conf import global_settings
+
 
 SRC_PATH = os.path.abspath(__file__)
 for i in range(2):
@@ -169,3 +171,8 @@ PHISHTANK_JSON_URL = ''.join(('http://data.phishtank.com/data/',
                               PHISHTANK_API_KEY,
                               '/online-valid.json'))
 ALLOWED_CHARACTERS = string.digits + string.letters
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+    'shortener.context_processors.absolute',
+)

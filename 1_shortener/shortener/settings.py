@@ -1,5 +1,6 @@
 # Django settings for shortener project.
 import os
+import string
 
 
 SRC_PATH = os.path.abspath(__file__)
@@ -166,4 +167,4 @@ PHISHTANK_API_KEY = '03dd2b2adce3749382b1360abd17f31808dd3a06a529e081bd0c016f0e5
 PHISHTANK_JSON_URL = ''.join(('http://data.phishtank.com/data/',
                               PHISHTANK_API_KEY,
                               '/online-valid.json'))
-
+ALLOWED_CHARACTERS = string.digits + string.letters

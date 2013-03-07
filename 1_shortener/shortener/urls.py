@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^$',ShorteningCreateView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<short_id>[a-zA-Z0-9]+)/$', ProtectedRedirectView.as_view()),
-    url(r'^(?P<short_id>[a-zA-Z0-9]+)/detail$',
+    url(r'^(?P<short_id>[a-zA-Z0-9]+)/detail/$',
         ShorteningDetailView.as_view()),
 )

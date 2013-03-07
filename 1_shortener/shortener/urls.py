@@ -9,7 +9,7 @@ from shortener.shortenings.views import ShorteningDetailView
 
 
 urlpatterns = patterns('',
-    url(r'^$',ShorteningCreateView.as_view()),
+    url(r'^$', ShorteningCreateView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<short_id>[a-zA-Z0-9]+)/$', ProtectedRedirectView.as_view()),
     url(r'^(?P<short_id>[a-zA-Z0-9]+)/detail/$',

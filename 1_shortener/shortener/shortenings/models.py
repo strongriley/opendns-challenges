@@ -10,7 +10,7 @@ def generate_short_id():
     """
     while True:
         short_id = ''.join([random.choice(settings.ALLOWED_CHARACTERS)
-            for i in range(8)])
+                            for i in range(8)])
         if Shortening.objects.filter(short_id=short_id).count() == 0:
             return short_id
 

@@ -1,5 +1,6 @@
 # URL Shortener: "Shorten That Link!"
 
+
 ## Installation
 A virtual environment can be setup based on the requirements file.
 ```
@@ -13,6 +14,7 @@ For debugging, a simple sqlite database is used.
 ```
 python manage.py syncdb
 ```
+
 
 ## Phishing Import
 For performance, all data from phishtank.com is imported in a batch hourly
@@ -30,3 +32,17 @@ python manage.py runjobs hourly
 To speed up the debugging process, I included a file from phishtank.com in 
 the repo. But the next time the command is run, it will pull it from the
 server, which can take a while (it's around 50 MB).
+
+
+# Unit Tests
+There are some basic tests that check the behavior on how a shortened link 
+behaves.
+```
+python manage.py test shortenings
+```
+
+# Run Debugging Server
+```
+python manage.py runserver
+```
+You'll then be able to access the site at http://localhost:8000/
